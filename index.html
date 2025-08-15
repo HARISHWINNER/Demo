@@ -62,7 +62,6 @@
         <!-- Generator View -->
         <div id="generator-view">
             <header class="text-center mb-8 no-print">
-                <!-- THIS HEADER TEXT WAS CHANGED TO FORCE A CACHE REFRESH -->
                 <h1 class="text-4xl sm:text-5xl font-bold text-gray-800 cert-title-font">Certificate Generator & Authenticator</h1>
                 <p class="text-gray-600 mt-2 text-lg">Generate and preview a verifiable certificate.</p>
             </header>
@@ -282,13 +281,25 @@
             const validationUrl = `${window.location.href.split('#')[0]}#validate?cert=${encodedPayload}`;
 
             const qrcodePreviewDiv = document.getElementById('qrcode-preview');
+            
+            // SVG logo for the QR code (a simple star)
+            const logoSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#4f46e5"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 19.445l-7.416 4.968 1.48-8.279L0 9.306l8.332-1.151z"/></svg>';
+            const logoDataUri = `data:image/svg+xml;base64,${btoa(logoSvg)}`;
+
             qrcodePreviewDiv.innerHTML = new QRCode({
                 content: validationUrl,
-                padding: 0,
+                padding: 1,
                 width: 96,
                 height: 96,
-                ecl: "H",
-                shape: "rounded" // This creates the rounded shape
+                ecl: "H", // High error correction is essential for logos
+                shape: "rounded",
+                logo: {
+                    src: logoDataUri,
+                    w: 30, // Logo width
+                    h: 30, // Logo height
+                    x: 33, // Position x
+                    y: 33  // Position y
+                }
             }).svg();
             document.getElementById('certificate-preview-container').classList.remove('hidden');
         });
