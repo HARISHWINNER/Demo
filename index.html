@@ -78,10 +78,6 @@
                             <label for="certDate" class="block text-sm font-medium text-gray-700">Date of Issue</label>
                             <input type="text" id="certDate" class="mt-1 block w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md shadow-sm" readonly>
                         </div>
-                        <div>
-                            <label for="secretKey" class="block text-sm font-medium text-gray-700">Secret Key</label>
-                            <input type="password" id="secretKey" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="A secret phrase for signing">
-                        </div>
                     </div>
                     <button id="generateBtn" class="mt-6 w-full bg-indigo-600 text-white font-bold py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out">
                         Generate & Preview Certificate
@@ -165,6 +161,10 @@
     </div>
 
     <script>
+        // --- IMPORTANT: This is now the single source of truth for security ---
+        // You can change this to any unique, complex string you want.
+        const SECRET_KEY = "Your-Own-Unique-And-Hard-To-Guess-Secret-Key-Goes-Here";
+
         // --- Simulated Database ---
         const usersDB = [ { id: 1, name: 'Ada Lovelace' }, { id: 2, name: 'Grace Hopper' }, { id: 3, name: 'Charles Babbage' }, { id: 4, name: 'Alan Turing' }];
         const coursesDB = [ { id: 101, title: 'Advanced Web Development', description: 'For demonstrating mastery in modern web development principles and practices.' }, { id: 102, title: 'Introduction to AI', description: 'For completing the foundational course on Artificial Intelligence and Machine Learning.' }, { id: 103, title: 'Cybersecurity Essentials', description: 'For acquiring essential skills in protecting digital assets and infrastructure.' }, { id: 104, title: 'Data Structures & Algorithms', description: 'For mastering fundamental concepts of data organization and problem-solving.' }];
@@ -230,9 +230,8 @@
             const course = coursesDB.find(c => c.id === selectedCourseId);
             const description = document.getElementById('certDesc').value;
             const date = document.getElementById('certDate').value;
-            const secret = document.getElementById('secretKey').value;
-
-            if (!name || !course || !date || !secret) {
+            
+            if (!name || !course || !date) {
                 alert('Please fill in all required fields.');
                 return;
             }
@@ -244,7 +243,7 @@
 
             const certificateData = { name, course: course.title, description, date };
             const dataString = JSON.stringify(certificateData);
-            const signature = await createSignature(dataString, secret);
+            const signature = await createSignature(dataString, SECRET_KEY); // Use the constant key
             const qrPayload = { data: certificateData, sig: signature };
             const encodedPayload = btoa(JSON.stringify(qrPayload));
             const validationUrl = `${window.location.href.split('#')[0]}#validate?cert=${encodedPayload}`;
@@ -259,10 +258,6 @@
         // --- Validation View Logic ---
         async function handleValidationFromURL() {
             try {
-                // IMPORTANT: The secret key used for generation MUST be identical here.
-                // Change this to your own unique, private key.
-                const hardcodedSecretKey = document.getElementById('secretKey').value || 'your-default-secret-key';
-
                 const encodedPayload = window.location.hash.split('cert=')[1];
                 if (!encodedPayload) throw new Error("Certificate data not found in URL.");
 
@@ -281,7 +276,7 @@
 
                 // Automatically verify the certificate
                 const dataString = JSON.stringify(payload.data);
-                const expectedSignature = await createSignature(dataString, hardcodedSecretKey);
+                const expectedSignature = await createSignature(dataString, SECRET_KEY); // Use the constant key
 
                 if (payload.sig === expectedSignature) {
                     displayValidationResult(true);
