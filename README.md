@@ -1,1 +1,1 @@
-QR certificate generator
+QR certificate generator.
