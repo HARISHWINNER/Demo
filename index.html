@@ -253,7 +253,25 @@
             document.getElementById('certificate-preview-container').classList.remove('hidden');
         });
 
-        document.getElementById('printBtn').addEventListener('click', () => window.print());
+        document.getElementById('printBtn').addEventListener('click', () => {
+            const courseName = document.getElementById('preview-course-title').textContent;
+            const recipientName = document.getElementById('preview-name').textContent;
+            const originalTitle = document.title;
+
+            if (courseName && recipientName) {
+                // Create a clean filename like "Certificate_Advanced_Web_Development_Ada_Lovelace"
+                const cleanCourseName = courseName.replace(/[^a-zA-Z0-9]/g, '_');
+                const cleanRecipientName = recipientName.replace(/[^a-zA-Z0-9]/g, '_');
+                document.title = `Certificate_${cleanCourseName}_${cleanRecipientName}`;
+            }
+
+            window.print();
+
+            // Restore the original title after the print dialog is handled.
+            setTimeout(() => {
+                document.title = originalTitle;
+            }, 1000);
+        });
 
         // --- Validation View Logic ---
         async function handleValidationFromURL() {
