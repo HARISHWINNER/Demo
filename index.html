@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- New SVG QR Code Generation Library -->
     <script src="https://cdn.jsdelivr.net/npm/qrcode-svg@1.1.0/dist/qrcode.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Playfair+Display:wght@900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* --- High-Quality Print Styles --- */
         @page {
@@ -34,7 +34,7 @@
                 width: 100%; height: 100%;
                 margin: 0;
                 padding: 1cm;
-                border: 10px solid #374151;
+                border: none; /* Border is now part of the inner div */
                 box-sizing: border-box;
             }
             .certificate-font { text-rendering: geometricPrecision; }
@@ -42,25 +42,34 @@
         }
         /* --- End Print Styles --- */
 
+        body {
+            background-color: #f8fafc;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4d4d8' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
         .certificate-font { font-family: 'Merriweather', serif; }
         .cert-title-font { font-family: 'Playfair Display', serif; }
+        .ui-font { font-family: 'Lato', sans-serif; }
+        .certificate-background {
+            background-color: #fdfdfd;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23e5e7eb' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
     </style>
 </head>
-<body class="bg-gray-100 font-sans antialiased">
+<body class="ui-font antialiased">
 
     <div class="container mx-auto p-4 sm:p-6 lg:p-8">
         
         <!-- Generator View -->
         <div id="generator-view">
             <header class="text-center mb-8 no-print">
-                <h1 class="text-3xl sm:text-4xl font-bold text-gray-800">Certificate QR Authenticator</h1>
-                <p class="text-gray-600 mt-2">Generate and preview a verifiable certificate.</p>
+                <h1 class="text-4xl sm:text-5xl font-bold text-gray-800 cert-title-font">Certificate Authenticator</h1>
+                <p class="text-gray-600 mt-2 text-lg">Generate and preview a verifiable certificate.</p>
             </header>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                 <!-- Input Form -->
-                <div class="bg-white p-6 rounded-lg shadow-md no-print">
-                    <h2 class="text-2xl font-semibold text-gray-700 border-b pb-3 mb-4">1. Enter Certificate Details</h2>
+                <div class="bg-white p-6 rounded-xl shadow-lg no-print">
+                    <h2 class="text-2xl font-bold text-gray-700 border-b pb-3 mb-6">1. Enter Certificate Details</h2>
                     <div class="space-y-4">
                         <div>
                             <label for="certName" class="block text-sm font-medium text-gray-700">Recipient Name</label>
@@ -72,49 +81,52 @@
                         </div>
                         <div>
                             <label for="certDesc" class="block text-sm font-medium text-gray-700">Course Description</label>
-                            <textarea id="certDesc" rows="2" class="mt-1 block w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md shadow-sm" readonly placeholder="Select a course to see its description."></textarea>
+                            <textarea id="certDesc" rows="3" class="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm" readonly placeholder="Select a course to see its description."></textarea>
                         </div>
                         <div>
                             <label for="certDate" class="block text-sm font-medium text-gray-700">Date of Issue</label>
-                            <input type="text" id="certDate" class="mt-1 block w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md shadow-sm" readonly>
+                            <input type="text" id="certDate" class="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm" readonly>
                         </div>
                     </div>
-                    <button id="generateBtn" class="mt-6 w-full bg-indigo-600 text-white font-bold py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out">
+                    <button id="generateBtn" class="mt-8 w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold py-3 px-4 rounded-lg hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-transform transform hover:scale-105 duration-150 ease-in-out">
                         Generate & Preview Certificate
                     </button>
                 </div>
 
                 <!-- Certificate Preview -->
                 <div id="certificate-preview-container" class="hidden">
-                     <h2 class="text-2xl font-semibold text-gray-700 text-center lg:text-left mb-4 no-print">2. Preview & Print</h2>
-                    <div id="certificate-preview" class="bg-white p-8 rounded-lg shadow-2xl border-4 border-gray-300 aspect-[1.414/1] relative">
-                        <div class="text-center border-2 border-gray-800 p-6 h-full flex flex-col">
-                            <div class="flex-shrink-0">
-                                <h1 class="cert-title-font text-4xl sm:text-5xl font-black text-gray-800">Certificate of Completion</h1>
-                                <p class="certificate-font text-lg mt-4">This certificate is proudly presented to</p>
-                            </div>
-                            <div class="flex-grow flex items-center justify-center">
-                                <div class="text-center">
-                                    <p id="preview-name" class="certificate-font text-3xl sm:text-4xl font-bold my-4 text-indigo-700"></p>
-                                    <p class="certificate-font text-lg">for successfully completing the course</p>
-                                    <p id="preview-course-title" class="certificate-font text-2xl font-semibold mt-2"></p>
-                                    <p id="preview-course-desc" class="certificate-font text-sm mt-1 text-gray-600"></p>
+                     <h2 class="text-2xl font-bold text-gray-700 text-center lg:text-left mb-4 no-print">2. Preview & Print</h2>
+                    <div id="certificate-preview" class="bg-white p-4 rounded-lg shadow-2xl border border-gray-200 aspect-[1/1.414] relative">
+                        <div class="w-full h-full p-2 border-2 border-gray-600">
+                            <div class="w-full h-full text-center border-4 border-amber-400 p-6 flex flex-col certificate-background">
+                                <div class="flex-shrink-0">
+                                    <p class="certificate-font text-2xl text-gray-600">Certificate of Achievement</p>
+                                    <div class="w-24 h-1 bg-amber-400 mx-auto mt-2 mb-4"></div>
+                                    <p class="certificate-font text-lg mt-4 text-gray-500">This certificate is proudly presented to</p>
                                 </div>
-                            </div>
-                            <div class="flex-shrink-0 w-full flex justify-between items-end text-sm">
-                                <div class="text-left">
-                                    <p class="font-bold border-t-2 border-gray-700 pt-1">Date Issued</p>
-                                    <p id="preview-date"></p>
+                                <div class="flex-grow flex items-center justify-center">
+                                    <div class="text-center">
+                                        <p id="preview-name" class="cert-title-font font-bold my-4 text-indigo-700"></p>
+                                        <p class="certificate-font text-base text-gray-500">for successfully completing the course</p>
+                                        <p id="preview-course-title" class="certificate-font text-2xl font-semibold mt-2 text-gray-800"></p>
+                                        <p id="preview-course-desc" class="certificate-font text-sm mt-2 text-gray-500 max-w-md mx-auto"></p>
+                                    </div>
                                 </div>
-                                <div id="qrcode-preview" class="w-24 h-24 p-1 border bg-white"></div>
-                                <div class="text-right">
-                                    <p class="font-bold border-t-2 border-gray-700 pt-1">Signature</p>
-                                    <p>Issuing Authority</p>
+                                <div class="flex-shrink-0 w-full grid grid-cols-3 items-end text-sm mt-8">
+                                    <div class="text-center">
+                                        <p id="preview-date" class="border-b-2 border-gray-400 pb-1"></p>
+                                        <p class="font-bold pt-1">Date Issued</p>
+                                    </div>
+                                    <div id="qrcode-preview" class="w-24 h-24 p-1 border bg-white rounded-md shadow-sm mx-auto"></div>
+                                    <div class="text-center">
+                                        <p class="border-b-2 border-gray-400 pb-1 h-6"></p>
+                                        <p class="font-bold pt-1">Issuing Authority</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                     <button id="printBtn" class="mt-6 w-full bg-gray-700 text-white font-bold py-2 px-4 rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition duration-150 ease-in-out no-print">
+                     <button id="printBtn" class="mt-6 w-full bg-gray-700 text-white font-bold py-3 px-4 rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-transform transform hover:scale-105 duration-150 ease-in-out no-print">
                         Print Certificate
                     </button>
                 </div>
@@ -124,33 +136,36 @@
         <!-- Validation View -->
         <div id="validation-view" class="hidden">
              <header class="text-center mb-8">
-                <h1 class="text-3xl sm:text-4xl font-bold text-gray-800">Certificate Validation</h1>
+                <h1 class="text-4xl sm:text-5xl font-bold text-gray-800 cert-title-font">Certificate Validation</h1>
             </header>
             <div class="max-w-4xl mx-auto">
                 <!-- Validation Certificate Display -->
-                <div id="validation-certificate-display" class="bg-white p-8 rounded-lg shadow-2xl border-4 border-gray-300 aspect-[1.414/1] relative">
-                    <div id="validation-badge" class="absolute top-4 right-4 text-white font-bold py-2 px-4 rounded-lg text-lg hidden"></div>
-                    <div class="text-center border-2 border-gray-800 p-6 h-full flex flex-col">
-                        <div class="flex-shrink-0">
-                            <h1 class="cert-title-font text-4xl sm:text-5xl font-black text-gray-800">Certificate of Completion</h1>
-                            <p class="certificate-font text-lg mt-4">This certificate is proudly presented to</p>
-                        </div>
-                        <div class="flex-grow flex items-center justify-center">
-                            <div class="text-center">
-                                <p id="validation-name" class="certificate-font text-3xl sm:text-4xl font-bold my-4 text-indigo-700"></p>
-                                <p class="certificate-font text-lg">for successfully completing the course</p>
-                                <p id="validation-course-title" class="certificate-font text-2xl font-semibold mt-2"></p>
-                                <p id="validation-course-desc" class="certificate-font text-sm mt-1 text-gray-600"></p>
+                <div id="validation-certificate-display" class="bg-white p-4 rounded-lg shadow-2xl border border-gray-200 aspect-[1/1.414] relative">
+                    <div id="validation-badge" class="absolute top-6 right-6 text-white font-bold py-2 px-4 rounded-lg text-lg hidden shadow-lg"></div>
+                     <div class="w-full h-full p-2 border-2 border-gray-600">
+                        <div class="w-full h-full text-center border-4 border-amber-400 p-6 flex flex-col certificate-background">
+                            <div class="flex-shrink-0">
+                                <p class="certificate-font text-2xl text-gray-600">Certificate of Achievement</p>
+                                <div class="w-24 h-1 bg-amber-400 mx-auto mt-2 mb-4"></div>
+                                <p class="certificate-font text-lg mt-4 text-gray-500">This certificate is proudly presented to</p>
                             </div>
-                        </div>
-                        <div class="flex-shrink-0 w-full flex justify-between items-end text-sm">
-                            <div class="text-left">
-                                <p class="font-bold border-t-2 border-gray-700 pt-1">Date Issued</p>
-                                <p id="validation-date"></p>
+                            <div class="flex-grow flex items-center justify-center">
+                                <div class="text-center">
+                                    <p id="validation-name" class="cert-title-font font-bold my-4 text-indigo-700"></p>
+                                    <p class="certificate-font text-base text-gray-500">for successfully completing the course</p>
+                                    <p id="validation-course-title" class="certificate-font text-2xl font-semibold mt-2 text-gray-800"></p>
+                                    <p id="validation-course-desc" class="certificate-font text-sm mt-2 text-gray-500 max-w-md mx-auto"></p>
+                                </div>
                             </div>
-                            <div class="text-right">
-                                <p class="font-bold border-t-2 border-gray-700 pt-1">Signature</p>
-                                <p>Issuing Authority</p>
+                            <div class="flex-shrink-0 w-full grid grid-cols-2 items-end text-sm mt-8">
+                                <div class="text-center">
+                                    <p id="validation-date" class="border-b-2 border-gray-400 pb-1"></p>
+                                    <p class="font-bold pt-1">Date Issued</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="border-b-2 border-gray-400 pb-1 h-6"></p>
+                                    <p class="font-bold pt-1">Issuing Authority</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -199,6 +214,21 @@
             }
         });
 
+        // --- Helper function to adjust font size based on name length ---
+        function adjustNameFontSize(element, name) {
+            element.textContent = name;
+            // Reset classes to a base state
+            element.className = 'cert-title-font font-bold my-4 text-indigo-700';
+            
+            if (name.length > 25) {
+                element.classList.add('text-3xl');
+            } else if (name.length > 15) {
+                element.classList.add('text-4xl');
+            } else {
+                element.classList.add('text-5xl');
+            }
+        }
+
         // --- Generator View Logic ---
         function populateCourseDropdown() {
             const certCourseSelect = document.getElementById('certCourse');
@@ -236,7 +266,9 @@
                 return;
             }
 
-            document.getElementById('preview-name').textContent = name;
+            const previewNameEl = document.getElementById('preview-name');
+            adjustNameFontSize(previewNameEl, name);
+
             document.getElementById('preview-course-title').textContent = course.title;
             document.getElementById('preview-course-desc').textContent = description;
             document.getElementById('preview-date').textContent = date;
@@ -249,7 +281,14 @@
             const validationUrl = `${window.location.href.split('#')[0]}#validate?cert=${encodedPayload}`;
 
             const qrcodePreviewDiv = document.getElementById('qrcode-preview');
-            qrcodePreviewDiv.innerHTML = new QRCode({ content: validationUrl, padding: 0, width: 96, height: 96, ecl: "H" }).svg();
+            qrcodePreviewDiv.innerHTML = new QRCode({
+                content: validationUrl,
+                padding: 0,
+                width: 96,
+                height: 96,
+                ecl: "H",
+                shape: "rounded" // This creates the rounded shape
+            }).svg();
             document.getElementById('certificate-preview-container').classList.remove('hidden');
         });
 
@@ -283,7 +322,9 @@
                 if (!payload.data || !payload.sig) throw new Error("Invalid certificate data format.");
                 
                 // Populate the visual certificate
-                document.getElementById('validation-name').textContent = payload.data.name;
+                const validationNameEl = document.getElementById('validation-name');
+                adjustNameFontSize(validationNameEl, payload.data.name);
+
                 document.getElementById('validation-course-title').textContent = payload.data.course;
                 document.getElementById('validation-course-desc').textContent = payload.data.description;
                 document.getElementById('validation-date').textContent = payload.data.date;
