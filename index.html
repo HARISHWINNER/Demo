@@ -60,11 +60,11 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                 <!-- Input Form -->
                 <div class="bg-white p-6 rounded-lg shadow-md no-print">
-                    <h2 class="text-2xl font-semibold text-gray-700 border-b pb-3 mb-4">1. Select Certificate Details</h2>
+                    <h2 class="text-2xl font-semibold text-gray-700 border-b pb-3 mb-4">1. Enter Certificate Details</h2>
                     <div class="space-y-4">
                         <div>
                             <label for="certName" class="block text-sm font-medium text-gray-700">Recipient Name</label>
-                            <select id="certName" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"></select>
+                            <input type="text" id="certName" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="e.g., Ada Lovelace">
                         </div>
                         <div>
                             <label for="certCourse" class="block text-sm font-medium text-gray-700">Course / Achievement</label>
@@ -148,7 +148,6 @@
                                 <p class="font-bold border-t-2 border-gray-700 pt-1">Date Issued</p>
                                 <p id="validation-date"></p>
                             </div>
-                            <div id="validation-qrcode" class="w-24 h-24 p-1 border bg-white"></div>
                             <div class="text-right">
                                 <p class="font-bold border-t-2 border-gray-700 pt-1">Signature</p>
                                 <p>Issuing Authority</p>
@@ -166,8 +165,16 @@
         const SECRET_KEY = "Your-Own-Unique-And-Hard-To-Guess-Secret-Key-Goes-Here";
 
         // --- Simulated Database ---
-        const usersDB = [ { id: 1, name: 'Ada Lovelace' }, { id: 2, name: 'Grace Hopper' }, { id: 3, name: 'Charles Babbage' }, { id: 4, name: 'Alan Turing' }];
-        const coursesDB = [ { id: 101, title: 'Advanced Web Development', description: 'For demonstrating mastery in modern web development principles and practices.' }, { id: 102, title: 'Introduction to AI', description: 'For completing the foundational course on Artificial Intelligence and Machine Learning.' }, { id: 103, title: 'Cybersecurity Essentials', description: 'For acquiring essential skills in protecting digital assets and infrastructure.' }, { id: 104, title: 'Data Structures & Algorithms', description: 'For mastering fundamental concepts of data organization and problem-solving.' }];
+        const coursesDB = [ 
+            { id: 101, title: 'Advanced Web Development', description: 'For demonstrating mastery in modern web development principles and practices.' }, 
+            { id: 102, title: 'Introduction to AI', description: 'For completing the foundational course on Artificial Intelligence and Machine Learning.' }, 
+            { id: 103, title: 'Cybersecurity Essentials', description: 'For acquiring essential skills in protecting digital assets and infrastructure.' }, 
+            { id: 104, title: 'Data Structures & Algorithms', description: 'For mastering fundamental concepts of data organization and problem-solving.' },
+            { id: 105, title: 'Cloud Computing Foundations', description: 'For understanding the core concepts of cloud services and architecture.' },
+            { id: 106, title: 'Project Management Professional (PMP)', description: 'For achieving a globally recognized standard in project management.' },
+            { id: 107, title: 'Digital Marketing Fundamentals', description: 'For acquiring key skills in online marketing, SEO, and social media strategy.' },
+            { id: 108, title: 'UX/UI Design Principles', description: 'For mastering the art and science of creating user-centered digital experiences.' }
+        ];
 
         // --- Core Cryptography ---
         async function createSignature(text, secret) {
@@ -187,21 +194,14 @@
             } else {
                 document.getElementById('generator-view').classList.remove('hidden');
                 document.getElementById('validation-view').classList.add('hidden');
-                populateDropdowns();
+                populateCourseDropdown();
                 setAutonomousDate();
             }
         });
 
         // --- Generator View Logic ---
-        function populateDropdowns() {
-            const certNameSelect = document.getElementById('certName');
+        function populateCourseDropdown() {
             const certCourseSelect = document.getElementById('certCourse');
-            usersDB.forEach(user => {
-                const option = document.createElement('option');
-                option.value = user.name;
-                option.textContent = user.name;
-                certNameSelect.appendChild(option);
-            });
             coursesDB.forEach(course => {
                 const option = document.createElement('option');
                 option.value = course.id;
@@ -225,7 +225,7 @@
         }
 
         document.getElementById('generateBtn').addEventListener('click', async () => {
-            const name = document.getElementById('certName').value;
+            const name = document.getElementById('certName').value.trim();
             const selectedCourseId = parseInt(document.getElementById('certCourse').value);
             const course = coursesDB.find(c => c.id === selectedCourseId);
             const description = document.getElementById('certDesc').value;
@@ -270,10 +270,6 @@
                 document.getElementById('validation-course-desc').textContent = payload.data.description;
                 document.getElementById('validation-date').textContent = payload.data.date;
                 
-                // Re-generate the QR code for display
-                const validationUrl = window.location.href;
-                document.getElementById('validation-qrcode').innerHTML = new QRCode({ content: validationUrl, padding: 0, width: 96, height: 96, ecl: "H" }).svg();
-
                 // Automatically verify the certificate
                 const dataString = JSON.stringify(payload.data);
                 const expectedSignature = await createSignature(dataString, SECRET_KEY); // Use the constant key
