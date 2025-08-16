@@ -27,14 +27,14 @@
                 print-color-adjust: exact;
             }
             .no-print { display: none !important; }
-            #certificate-preview {
+            .printable-certificate {
                 display: block !important;
                 position: absolute;
                 top: 0; left: 0;
                 width: 100%; height: 100%;
                 margin: 0;
-                padding: 1cm;
-                border: none; /* Border is now part of the inner div */
+                padding: 0;
+                border: none;
                 box-sizing: border-box;
             }
             .certificate-font { text-rendering: geometricPrecision; }
@@ -49,10 +49,6 @@
         .certificate-font { font-family: 'Merriweather', serif; }
         .cert-title-font { font-family: 'Playfair Display', serif; }
         .ui-font { font-family: 'Lato', sans-serif; }
-        .certificate-background {
-            background-color: #fdfdfd;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23e5e7eb' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
     </style>
 </head>
 <body class="ui-font antialiased">
@@ -71,13 +67,6 @@
                 <div class="bg-white p-6 rounded-xl shadow-lg no-print">
                     <h2 class="text-2xl font-bold text-gray-700 border-b pb-3 mb-6">1. Enter Certificate Details</h2>
                     <div class="space-y-4">
-                        <div>
-                            <label for="orientation" class="block text-sm font-medium text-gray-700">Certificate Orientation</label>
-                            <div class="mt-2 flex rounded-md shadow-sm">
-                                <button id="orientation-vertical" class="px-4 py-2 border border-gray-300 bg-indigo-600 text-white rounded-l-md text-sm font-medium">Vertical</button>
-                                <button id="orientation-horizontal" class="px-4 py-2 border-t border-b border-r border-gray-300 bg-white text-gray-700 rounded-r-md text-sm font-medium">Horizontal</button>
-                            </div>
-                        </div>
                         <div>
                             <label for="certName" class="block text-sm font-medium text-gray-700">Recipient Name</label>
                             <input type="text" id="certName" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="e.g., Ada Lovelace">
@@ -100,66 +89,37 @@
                     </button>
                 </div>
 
-                <!-- Certificate Previews -->
+                <!-- Certificate Preview -->
                 <div id="certificate-preview-container" class="hidden">
                      <h2 class="text-2xl font-bold text-gray-700 text-center lg:text-left mb-4 no-print">2. Preview & Print</h2>
                     
-                    <!-- Vertical Preview -->
-                    <div id="certificate-preview-portrait" class="printable-certificate bg-white p-4 rounded-lg shadow-2xl border border-gray-200 aspect-[1/1.414] relative">
-                        <div class="w-full h-full p-2 border-2 border-gray-600">
-                            <div class="w-full h-full text-center border-4 border-amber-400 p-6 flex flex-col certificate-background">
-                                <div class="flex-shrink-0">
-                                    <p class="certificate-font text-2xl text-gray-600">Certificate of Achievement</p>
-                                    <div class="w-24 h-1 bg-amber-400 mx-auto mt-2 mb-4"></div>
-                                    <p class="certificate-font text-lg mt-4 text-gray-500">This certificate is proudly presented to</p>
-                                </div>
-                                <div class="flex-grow flex items-center justify-center">
-                                    <div class="text-center">
-                                        <p data-cert-field="name" class="cert-title-font font-bold my-4 text-indigo-700"></p>
-                                        <p class="certificate-font text-base text-gray-500">for successfully completing the course</p>
-                                        <p data-cert-field="course-title" class="certificate-font text-2xl font-semibold mt-2 text-gray-800"></p>
-                                        <p data-cert-field="course-desc" class="certificate-font text-sm mt-2 text-gray-500 max-w-md mx-auto"></p>
-                                    </div>
-                                </div>
-                                <div class="flex-shrink-0 w-full grid grid-cols-3 items-end text-sm mt-8">
-                                    <div class="text-center">
-                                        <p data-cert-field="date" class="border-b-2 border-gray-400 pb-1"></p>
-                                        <p class="font-bold pt-1">Date Issued</p>
-                                    </div>
-                                    <div data-cert-field="qrcode" class="w-24 h-24 p-1 border bg-white rounded-md shadow-sm mx-auto"></div>
-                                    <div class="text-center">
-                                        <p class="border-b-2 border-gray-400 pb-1 h-6"></p>
-                                        <p class="font-bold pt-1">Issuing Authority</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Horizontal Preview -->
-                    <div id="certificate-preview-landscape" class="printable-certificate bg-white p-4 rounded-lg shadow-2xl border border-gray-200 aspect-[1.414/1] relative hidden">
-                         <div class="w-full h-full text-center border-4 border-gray-300 p-6 flex flex-col bg-slate-50">
-                            <div class="flex-shrink-0">
-                                <h1 class="cert-title-font text-4xl sm:text-5xl font-black text-gray-800">Certificate of Completion</h1>
-                                <p class="certificate-font text-lg mt-4 text-gray-600">This certificate is proudly presented to</p>
+                    <div id="certificate-preview" class="printable-certificate bg-white rounded-lg shadow-2xl aspect-[1.414/1] relative flex overflow-hidden">
+                        <!-- Left Panel -->
+                        <div class="w-1/3 bg-gray-800 text-white p-8 flex flex-col justify-between">
+                            <div>
+                                <h2 class="cert-title-font text-3xl font-bold">Certificate of Completion</h2>
+                                <div class="w-16 h-1 bg-amber-400 mt-4"></div>
                             </div>
-                            <div class="flex-grow flex items-center justify-center">
-                                <div class="text-center">
-                                    <p data-cert-field="name" class="certificate-font text-3xl sm:text-4xl font-bold my-4 text-indigo-700"></p>
-                                    <p class="certificate-font text-lg text-gray-600">for successfully completing the course</p>
-                                    <p data-cert-field="course-title" class="certificate-font text-2xl font-semibold mt-2 text-gray-800"></p>
-                                    <p data-cert-field="course-desc" class="certificate-font text-base mt-2 text-gray-500 max-w-lg mx-auto"></p>
-                                </div>
+                            <div data-cert-field="qrcode" class="w-full p-2 border-2 border-gray-600 bg-white rounded-lg shadow-sm"></div>
+                        </div>
+                        <!-- Right Panel -->
+                        <div class="w-2/3 p-8 flex flex-col">
+                            <div class="flex-grow">
+                                <p class="certificate-font text-lg text-gray-500">This certificate is proudly presented to</p>
+                                <p data-cert-field="name" class="cert-title-font font-bold my-2 text-indigo-700"></p>
+                                <p class="certificate-font text-base text-gray-500">for successfully completing the course</p>
+                                <p data-cert-field="course-title" class="certificate-font text-2xl font-semibold mt-2 text-gray-800"></p>
+                                <p data-cert-field="course-desc" class="certificate-font text-sm mt-2 text-gray-500 max-w-md"></p>
                             </div>
-                            <div class="flex-shrink-0 w-full flex justify-between items-end text-sm">
+                            <div class="flex-shrink-0 w-full grid grid-cols-2 items-end text-sm mt-8 gap-8">
                                 <div class="text-left">
-                                    <p class="font-bold border-t-2 border-gray-400 pt-1">Date Issued</p>
-                                    <p data-cert-field="date"></p>
+                                    <p data-cert-field="date" class="border-b-2 border-gray-400 pb-1"></p>
+                                    <p class="font-bold pt-1">Date Issued</p>
                                 </div>
-                                <div data-cert-field="qrcode" class="w-24 h-24 p-1 border bg-white rounded-md shadow-sm"></div>
-                                <div class="text-right">
-                                    <p class="font-bold border-t-2 border-gray-400 pt-1">Signature</p>
-                                    <p>Issuing Authority</p>
+                                <div class="text-left">
+                                    <p class="border-b-2 border-gray-400 pb-1 h-6"></p>
+                                    <p class="font-bold pt-1">Issuing Authority</p>
                                 </div>
                             </div>
                         </div>
@@ -178,7 +138,40 @@
                 <h1 class="text-4xl sm:text-5xl font-bold text-gray-800 cert-title-font">Certificate Validation</h1>
             </header>
             <div class="max-w-4xl mx-auto">
-                <!-- Validation Certificate Display (Templates are here) -->
+                <!-- Validation Certificate Display -->
+                <div id="validation-certificate-display" class="bg-white rounded-lg shadow-2xl aspect-[1.414/1] relative flex overflow-hidden">
+                    <div id="validation-badge" class="absolute top-6 right-6 text-white font-bold py-2 px-4 rounded-lg text-lg hidden shadow-lg z-10"></div>
+                    <!-- Left Panel -->
+                    <div class="w-1/3 bg-gray-800 text-white p-8 flex flex-col justify-between">
+                        <div>
+                            <h2 class="cert-title-font text-3xl font-bold">Certificate of Completion</h2>
+                            <div class="w-16 h-1 bg-amber-400 mt-4"></div>
+                        </div>
+                        <div class="text-center">
+                             <svg class="w-24 h-24 text-gray-600 mx-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                        </div>
+                    </div>
+                    <!-- Right Panel -->
+                    <div class="w-2/3 p-8 flex flex-col">
+                        <div class="flex-grow">
+                            <p class="certificate-font text-lg text-gray-500">This certificate is proudly presented to</p>
+                            <p data-cert-field="name" class="cert-title-font font-bold my-2 text-indigo-700"></p>
+                            <p class="certificate-font text-base text-gray-500">for successfully completing the course</p>
+                            <p data-cert-field="course-title" class="certificate-font text-2xl font-semibold mt-2 text-gray-800"></p>
+                            <p data-cert-field="course-desc" class="certificate-font text-sm mt-2 text-gray-500 max-w-md"></p>
+                        </div>
+                        <div class="flex-shrink-0 w-full grid grid-cols-2 items-end text-sm mt-8 gap-8">
+                            <div class="text-left">
+                                <p data-cert-field="date" class="border-b-2 border-gray-400 pb-1"></p>
+                                <p class="font-bold pt-1">Date Issued</p>
+                            </div>
+                            <div class="text-left">
+                                <p class="border-b-2 border-gray-400 pb-1 h-6"></p>
+                                <p class="font-bold pt-1">Issuing Authority</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -257,26 +250,6 @@
             const month = String(today.getMonth() + 1).padStart(2, '0');
             const day = String(today.getDate()).padStart(2, '0');
             document.getElementById('certDate').value = `${year}-${month}-${day}`;
-            
-            // Orientation Toggle
-            const verticalBtn = document.getElementById('orientation-vertical');
-            const horizontalBtn = document.getElementById('orientation-horizontal');
-            let selectedOrientation = 'vertical';
-
-            verticalBtn.addEventListener('click', () => {
-                selectedOrientation = 'vertical';
-                verticalBtn.classList.add('bg-indigo-600', 'text-white');
-                verticalBtn.classList.remove('bg-white', 'text-gray-700');
-                horizontalBtn.classList.add('bg-white', 'text-gray-700');
-                horizontalBtn.classList.remove('bg-indigo-600', 'text-white');
-            });
-            horizontalBtn.addEventListener('click', () => {
-                selectedOrientation = 'horizontal';
-                horizontalBtn.classList.add('bg-indigo-600', 'text-white');
-                horizontalBtn.classList.remove('bg-white', 'text-gray-700');
-                verticalBtn.classList.add('bg-white', 'text-gray-700');
-                verticalBtn.classList.remove('bg-indigo-600', 'text-white');
-            });
 
             // Generate Button
             document.getElementById('generateBtn').addEventListener('click', async () => {
@@ -291,22 +264,16 @@
                     return;
                 }
                 
-                // Show the correct preview template
-                const portraitPreview = document.getElementById('certificate-preview-portrait');
-                const landscapePreview = document.getElementById('certificate-preview-landscape');
-                const activePreview = selectedOrientation === 'vertical' ? portraitPreview : landscapePreview;
+                const activePreview = document.getElementById('certificate-preview');
 
-                portraitPreview.classList.toggle('hidden', selectedOrientation !== 'vertical');
-                landscapePreview.classList.toggle('hidden', selectedOrientation !== 'horizontal');
-
-                // Populate the active template
+                // Populate the template
                 const nameEl = activePreview.querySelector('[data-cert-field="name"]');
                 adjustNameFontSize(nameEl, name);
                 activePreview.querySelector('[data-cert-field="course-title"]').textContent = course.title;
                 activePreview.querySelector('[data-cert-field="course-desc"]').textContent = description;
                 activePreview.querySelector('[data-cert-field="date"]').textContent = date;
 
-                const certificateData = { name, course: course.title, description, date, orientation: selectedOrientation };
+                const certificateData = { name, course: course.title, description, date };
                 const dataString = JSON.stringify(certificateData);
                 const signature = await createSignature(dataString, SECRET_KEY);
                 const qrPayload = { data: certificateData, sig: signature };
@@ -314,15 +281,15 @@
                 const validationUrl = `${window.location.href.split('#')[0]}#validate?cert=${encodedPayload}`;
 
                 const qrcodePreviewDiv = activePreview.querySelector('[data-cert-field="qrcode"]');
-                qrcodePreviewDiv.innerHTML = new QRCode({ content: validationUrl, padding: 0, width: 96, height: 96, ecl: "H" }).svg();
+                qrcodePreviewDiv.innerHTML = new QRCode({ content: validationUrl, padding: 1, width: 96, height: 96, ecl: "H" }).svg();
                 
                 document.getElementById('certificate-preview-container').classList.remove('hidden');
             });
 
             // Print Button
             document.getElementById('printBtn').addEventListener('click', () => {
-                const courseName = document.querySelector('#certificate-preview-container .printable-certificate:not(.hidden) [data-cert-field="course-title"]').textContent;
-                const recipientName = document.querySelector('#certificate-preview-container .printable-certificate:not(.hidden) [data-cert-field="name"]').textContent;
+                const courseName = document.querySelector('#certificate-preview [data-cert-field="course-title"]').textContent;
+                const recipientName = document.querySelector('#certificate-preview [data-cert-field="name"]').textContent;
                 const originalTitle = document.title;
 
                 if (courseName && recipientName) {
@@ -346,25 +313,7 @@
                 const payload = JSON.parse(atob(encodedPayload));
                 if (!payload.data || !payload.sig) throw new Error("Invalid certificate data format.");
                 
-                // Clone the correct template for validation view
-                const orientation = payload.data.orientation || 'horizontal'; // Default to horizontal if not specified
-                const templateId = `certificate-preview-${orientation}`;
-                const template = document.getElementById(templateId);
-                const validationContainer = document.querySelector('#validation-view .max-w-4xl');
-                const validationCert = template.cloneNode(true);
-                
-                validationCert.id = 'validation-certificate-display';
-                validationCert.classList.remove('hidden', 'printable-certificate');
-                validationCert.querySelector('[data-cert-field="qrcode"]').remove(); // Remove QR from validation
-                
-                // Add badge placeholder
-                const badge = document.createElement('div');
-                badge.id = 'validation-badge';
-                badge.className = 'absolute top-6 right-6 text-white font-bold py-2 px-4 rounded-lg text-lg hidden shadow-lg';
-                validationCert.firstChild.appendChild(badge);
-                
-                validationContainer.innerHTML = ''; // Clear previous content
-                validationContainer.appendChild(validationCert);
+                const validationCert = document.getElementById('validation-certificate-display');
                 
                 // Populate the visual certificate
                 const validationNameEl = validationCert.querySelector('[data-cert-field="name"]');
@@ -381,7 +330,7 @@
 
             } catch (error) {
                 console.error(error);
-                document.querySelector('#validation-view .max-w-4xl').innerHTML = `<p class="text-red-500 text-center text-xl p-8">Error: Could not read certificate data from the URL. It may be corrupted or invalid.</p>`;
+                document.getElementById('validation-certificate-display').innerHTML = `<p class="text-red-500 text-center text-xl p-8">Error: Could not read certificate data from the URL. It may be corrupted or invalid.</p>`;
             }
         }
 
